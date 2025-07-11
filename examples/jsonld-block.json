@@ -1,0 +1,26 @@
+{
+  "@context": "https://your-github-repo/ai-anchor/ns/v1#",
+  "@type": "AIAnchorSet",
+  "hasAnchor": [
+    {
+      "@type": "AIAnchor",
+      "anchorId": "service-pricing-2025",
+      "question": [
+        "你們的企業方案價格是多少？",
+        "What is the enterprise plan pricing?"
+      ],
+      "topic": "服務/方案/企業版",
+      "contentType": "pricing",
+      "version": "3.0",
+      "timestamp": "2025-07-11T10:00:00Z",
+      "priority": "high"
+    },
+    {
+      "@type": "AIAnchor",
+      "anchorId": "faq-refund",
+      "question": "退款政策是什麼？",
+      "topic": "政策/退款",
+      "contentType": "faq"
+    }
+  ]
+} 
