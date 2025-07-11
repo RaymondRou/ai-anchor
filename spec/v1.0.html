@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Anchor 規格 v1.0</title>
+</head>
+<body>
+  <h1>AI Anchor 規格 v1.0 / AI Anchor Specification v1.0</h1>
+  <p><b>W3C 編輯草案 / W3C Editor's Draft, 11 July 2025</b></p>
+  <p>本文件：<br>This version:<br>
+  <a href="https://your-github-repo/ai-anchor/spec/v1.0">https://your-github-repo/ai-anchor/spec/v1.0</a></p>
+  <p>最新發佈版本：<br>Latest published version:<br>
+  <a href="https://your-github-repo/ai-anchor/spec/">https://your-github-repo/ai-anchor/spec/</a></p>
+  <p>編輯者 / Editors:<br>[Your Name / Your Organization]</p>
+  <p>版權所有 © 2025 [Your Name / Your Organization]。本作品採用 Creative Commons Attribution 4.0 International License 授權。<br>
+  Copyright © 2025 [Your Name / Your Organization]. This work is licensed under a Creative Commons Attribution 4.0 International License.</p>
+
+  <h2>摘要 / Abstract</h2>
+  <p>本文件定義「AI Anchor」規格，一組 HTML 屬性與慣例，旨在提升網頁內容對人工智慧（AI）模型的可機器解讀性。透過明確標記關鍵內容區塊、主題及其回答的用戶問題，AI Anchor 能讓資料擷取更精確、高效且具脈絡。規格亦提出 sitemap-ai.xml 及 JSON-LD 替代表示法，確保廣泛相容與推廣。</p>
+  <p>This document defines the "AI Anchor" specification, a set of HTML attributes and conventions designed to improve the machine readability of web content for Artificial Intelligence (AI) models. By providing explicit, granular markers for key content blocks, their associated topics, and the user questions they answer, AI Anchors enable more accurate, efficient, and context-aware data extraction. This specification also proposes extensions for content discovery via a specialized sitemap (sitemap-ai.xml) and an alternative representation using JSON-LD, ensuring broad compatibility and adoption.</p>
+
+  <h2>文件狀態 / Status of This Document</h2>
+  <p>本文件為編輯草案，僅供公開討論與審閱。規格內容已趨穩定，歡迎網頁開發者、AI 開發者及 CMS 廠商提供意見。請於 GitHub 回報問題或提出 pull request。草案發佈不代表任何組織背書。</p>
+  <p>This document is an Editor's Draft. It is intended for public discussion and review. The specification is considered stable, but feedback from web developers, AI developers, and CMS vendors is encouraged. Please submit issues and pull requests on the project's GitHub repository. Publication as an Editor's Draft does not imply endorsement by any organization.</p>
+
+  <h2>目錄 / Table of Contents</h2>
+  <ol>
+    <li>簡介 / Introduction</li>
+    <li>核心規格：HTML 屬性 / Core Specification: HTML Attributes</li>
+    <li>替代表示法：JSON-LD / Alternative Representations: JSON-LD</li>
+    <li>實作指引：WordPress 外掛 / Implementation Guide: WordPress Plugin</li>
+    <li>發現機制：sitemap-ai.xml 協議 / Discovery Mechanism: The sitemap-ai.xml Protocol</li>
+    <li>常見問答 / Frequently Asked Questions (FAQ)</li>
+  </ol>
+
+  <h2>1. 簡介 / Introduction</h2>
+  <h3>1.1 動機：為何需要 AI Anchors？ / Motivation: Why AI Anchors?</h3>
+  <p>現代 AI 模型（特別是大型語言模型）需理解與摘要網頁，但標準 HTML 缺乏明確標記內容脈絡的機制，導致 AI 需依賴推測，易產生誤判或雜訊。AI Anchor 標準彌補此缺口，讓內容創作者能明確標示重點、主題、回答的問題與相關中繼資料，提升 AI 理解與資料品質。</p>
+  <p>Modern AI models, particularly Large Language Models (LLMs), are increasingly tasked with crawling, understanding, and summarizing the web. However, standard HTML, while excellent for presentation, lacks a native mechanism to explicitly denote the purpose and context of specific content fragments. This ambiguity forces AI models to rely on heuristics to infer which parts of a page answer a specific question or relate to a certain topic, often leading to inaccuracies, hallucinations, or extraction of irrelevant boilerplate content. The AI Anchor standard addresses this gap. It provides a simple, semantic layer upon HTML to:
+<ul>
+<li>Pinpoint Key Information: Directly flag the most important content sections for an AI.</li>
+<li>Provide Context: Link content directly to the natural language questions it answers.</li>
+<li>Improve Classification: Assign structured topic categories to content blocks.</li>
+<li>Enhance Data Reliability: Attach metadata such as timestamps, versions, and licenses.</li>
+</ul>
+By adopting AI Anchors, content creators gain explicit control over how their information is interpreted by machines, leading to better representation in AI-driven search results, chatbots, and data analysis tools.</p>
+
+  <h3>1.2 設計原則 / Design Principles</h3>
+  <ul>
+    <li>簡單與漸進：易於採用，無需重構整站。<br>Simplicity & Incrementality: Easy to adopt without requiring a full site rewrite.</li>
+    <li>互通性：補足而非取代現有標準（如 Schema.org、ARIA）。<br>Interoperability: Complements, rather than competes with, existing standards like Schema.org and ARIA.</li>
+    <li>低負擔：採用標準 data-* 屬性，避免衝突並維持效能。<br>Low Overhead: Utilizes standard data-* attributes to avoid conflicts and maintain performance.</li>
+    <li>可擴展性：核心屬性設計明確，易於未來擴充。<br>Extensibility: Designed with a core set of attributes and a clear path for future extensions.</li>
+  </ul>
+
+  <h2>2. 核心規格：HTML 屬性 / Core Specification: HTML Attributes</h2>
+  <p>本規格核心為一組 data-* 屬性，可套用於任何 HTML 元素（如 &lt;section&gt;、&lt;div&gt;、&lt;article&gt;）。<br>The core of the specification is a set of data-* attributes that can be applied to any HTML element (e.g., &lt;section&gt;, &lt;div&gt;, &lt;article&gt;).</p>
+
+  <h3>2.1 主要屬性 / Primary Attributes</h3>
+  <table border="1" cellpadding="4">
+    <tr><th>屬性<br>Attribute</th><th>說明<br>Description</th><th>值型態<br>Value Type</th></tr>
+    <tr><td>data-ai-anchor</td><td>（必填）頁面內唯一內容區塊識別碼<br>(Required) A unique identifier for the content block within the page.</td><td>string</td></tr>
+    <tr><td>data-ai-question</td><td>內容區塊回答的自然語言問題（可多個，以分號分隔）<br>A natural language question (or multiple questions separated by a semicolon ;) that the content block answers.</td><td>string</td></tr>
+    <tr><td>data-ai-topic</td><td>內容主題分類（階層以 / 分隔）<br>A hierarchical topic classification for the content. Uses a forward slash / as a delimiter.</td><td>string</td></tr>
+    <tr><td>data-ai-content</td><td>內容性質，見下方允許值<br>The nature of the content. See section 2.1.1 for allowed values.</td><td>enum</td></tr>
+  </table>
+
+  <h4>2.1.1 data-ai-content 允許值 / Allowed values for data-ai-content</h4>
+  <p>summary, definition, faq, how-to, review, pricing, specification, location, contact, legal, data-table, media-gallery, author（可擴充）<br>This list is extensible.</p>
+
+  <h3>2.2 中繼資料擴充屬性 / Metadata Extension Attributes</h3>
+  <table border="1" cellpadding="4">
+    <tr><th>屬性<br>Attribute</th><th>說明<br>Description</th><th>值型態<br>Value Type</th></tr>
+    <tr><td>data-ai-meta-version</td><td>內容區塊版本<br>The version of the content block.</td><td>string (e.g., 1.2)</td></tr>
+    <tr><td>data-ai-meta-timestamp</td><td>最後更新時間（ISO 8601 格式）<br>The last update time in ISO 8601 format.</td><td>datetime</td></tr>
+    <tr><td>data-ai-meta-license</td><td>內容授權（SPDX ID 或 URL）<br>The content license (SPDX ID or URL).</td><td>string</td></tr>
+    <tr><td>data-ai-meta-priority</td><td>相對重要性（high, medium, low）<br>Relative importance (high, medium, low).</td><td>enum</td></tr>
+    <tr><td>data-ai-meta-expires</td><td>到期日（ISO 8601 格式）<br>Expiration date in ISO 8601 format.</td><td>datetime</td></tr>
+    <tr><td>data-ai-meta-dependency</td><td>依賴其他 data-ai-anchor ID（以逗號分隔）<br>Comma-separated list of other data-ai-anchor IDs this block depends on.</td><td>string</td></tr>
+  </table>
+
+  <h3>2.3 使用範例 / Usage Example</h3>
+  <pre><code>&lt;article
+  data-ai-anchor="service-pricing-2025"
+  data-ai-question="你們的企業方案價格是多少？;What is the enterprise plan pricing?"
+  data-ai-topic="服務/方案/企業版"
+  data-ai-content="pricing"
+  data-ai-meta-version="3.0"
+  data-ai-meta-timestamp="2025-07-11T10:00:00Z"
+  data-ai-meta-priority="high"&gt;
+  &lt;h3&gt;企業版方案&lt;/h3&gt;
+  &lt;p&gt;聯繫我們的銷售團隊以獲取客製化報價。&lt;/p&gt;
+&lt;/article&gt;</code></pre>
+
+  <h2>3. 替代表示法：JSON-LD / Alternative Representations: JSON-LD</h2>
+  <p>為支援語意網與現代資料管線，AI Anchor 可用 JSON-LD 於 &lt;script type="application/ld+json"&gt; 區塊表示，方便爬蟲一次擷取所有 anchor 資料。</p>
+  <p>To support modern data pipelines and semantic web technologies, AI Anchors can be represented within a &lt;script type="application/ld+json"&gt; block. This allows crawlers to gather all anchor data in a single, structured format without parsing the entire DOM.</p>
+
+  <h3>3.1 JSON-LD Context</h3>
+  <pre><code>{
+  "@context": {
+    "ai": "https://your-github-repo/ai-anchor/ns/v1#",
+    "AIAnchorSet": "ai:AIAnchorSet",
+    "hasAnchor": "ai:hasAnchor",
+    "anchorId": "ai:anchorId",
+    "question": "ai:question",
+    "topic": "ai:topic",
+    "contentType": "ai:contentType",
+    "version": "ai:version",
+    "timestamp": "ai:timestamp",
+    "license": "ai:license",
+    "priority": "ai:priority",
+    "expires": "ai:expires",
+    "dependency": "ai:dependency"
+  }
+}</code></pre>
+
+  <h3>3.2 JSON-LD 範例 / JSON-LD Example</h3>
+  <pre><code>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://your-github-repo/ai-anchor/ns/v1#",
+  "@type": "AIAnchorSet",
+  "hasAnchor": [
+    {
+      "@type": "AIAnchor",
+      "anchorId": "service-pricing-2025",
+      "question": [
+        "你們的企業方案價格是多少？",
+        "What is the enterprise plan pricing?"
+      ],
+      "topic": "服務/方案/企業版",
+      "contentType": "pricing",
+      "version": "3.0",
+      "timestamp": "2025-07-11T10:00:00Z",
+      "priority": "high"
+    },
+    {
+      "@type": "AIAnchor",
+      "anchorId": "faq-refund",
+      "question": "退款政策是什麼？",
+      "topic": "政策/退款",
+      "contentType": "faq"
+    }
+  ]
+}
+&lt;/script&gt;</code></pre>
+
+  <h2>4. 實作指引：WordPress 外掛 / Implementation Guide: WordPress Plugin</h2>
+  <ul>
+    <li>設定頁面：啟用/停用功能與文件說明。<br>Settings Panel: A settings page to enable/disable features and view documentation.</li>
+    <li>自動產生 sitemap-ai.xml。<br>Automated sitemap-ai.xml Generation: Automatically create and update the sitemap-ai.xml file.</li>
+    <li>自動產生 JSON-LD。<br>JSON-LD Generation: Option to automatically generate the JSON-LD script in the page &lt;head&gt; based on the anchors defined in the content.</li>
+    <li>Gutenberg 整合：AI Anchor 容器區塊與屬性面板。<br>Block Editor (Gutenberg) Integration: Wrapper Block and Attribute Panel for core blocks.</li>
+    <li>Classic Editor 整合：meta box 與 shortcode。<br>Classic Editor Integration: Meta Box and Shortcode support.</li>
+  </ul>
+
+  <h2>5. 發現機制：sitemap-ai.xml 協議 / Discovery Mechanism: The sitemap-ai.xml Protocol</h2>
+  <p>為利爬蟲發現含 AI Anchor 的頁面，建議於網站根目錄放置 sitemap-ai.xml，並於 robots.txt 加註：</p>
+  <p>To allow crawlers to efficiently discover pages with AI Anchors and the anchors themselves, we propose an extension to the sitemap protocol. A new file, sitemap-ai.xml, should be placed in the root directory and referenced in robots.txt.</p>
+  <pre><code>Sitemap: https://www.example.com/sitemap-ai.xml</code></pre>
+
+  <h3>5.1 schema 定義 / Schema Definition</h3>
+  <p>sitemap-ai.xml 採用標準 sitemap XML schema，並於每個 &lt;url&gt; 區塊內可有多個 &lt;ai:anchor&gt; 元素，描述該頁的 AI Anchor。</p>
+  <p>The sitemap-ai.xml uses the standard sitemap XML schema but introduces a new &lt;ai:anchor&gt; element within each &lt;url&gt; block.</p>
+  <pre><code>&lt;urlset&gt;: 根元素 / The root element.
+&lt;url&gt;: 單一頁面資訊 / Contains information about a single URL.
+&lt;loc&gt;: 頁面網址 / The URL of the page.
+&lt;lastmod&gt;: （選填）頁面修改時間 / (Optional) The modification time of the page.
+&lt;ai:anchor&gt;: （可多個）描述單一 AI Anchor / (Optional, multiple allowed) Describes a single AI Anchor on the page.
+&lt;ai:id&gt;: data-ai-anchor 識別碼 / The data-ai-anchor identifier.
+&lt;ai:topic&gt;: data-ai-topic 值 / The data-ai-topic value.
+&lt;ai:updated&gt;: data-ai-meta-timestamp 值 / The data-ai-meta-timestamp value.</code></pre>
+
+  <h3>5.2 sitemap-ai.xml 範例 / Example sitemap-ai.xml</h3>
+  <pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:ai="https://your-github-repo/ai-anchor/ns/v1/sitemap"&gt;
+  &lt;url&gt;
+    &lt;loc&gt;https://www.example.com/services/enterprise&lt;/loc&gt;
+    &lt;lastmod&gt;2025-07-11T10:00:00Z&lt;/lastmod&gt;
+    &lt;ai:anchor&gt;
+      &lt;ai:id&gt;service-pricing-2025&lt;/ai:id&gt;
+      &lt;ai:topic&gt;服務/方案/企業版&lt;/ai:topic&gt;
+      &lt;ai:updated&gt;2025-07-11T10:00:00Z&lt;/ai:updated&gt;
+    &lt;/ai:anchor&gt;
+    &lt;ai:anchor&gt;
+      &lt;ai:id&gt;contact-sales&lt;/ai:id&gt;
+      &lt;ai:topic&gt;聯絡資訊/銷售&lt;/ai:topic&gt;
+      &lt;ai:updated&gt;2025-01-05T00:00:00Z&lt;/ai:updated&gt;
+    &lt;/ai:anchor&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;https://www.example.com/support/faq&lt;/loc&gt;
+    &lt;lastmod&gt;2025-06-20T14:00:00Z&lt;/lastmod&gt;
+    &lt;ai:anchor&gt;
+      &lt;ai:id&gt;faq-refund&lt;/ai:id&gt;
+      &lt;ai:topic&gt;政策/退款&lt;/ai:topic&gt;
+      &lt;ai:updated&gt;2025-06-20T14:00:00Z&lt;/ai:updated&gt;
+    &lt;/ai:anchor&gt;
+  &lt;/url&gt;
+&lt;/urlset&gt;</code></pre>
+
+  <h2>6. 常見問答 / Frequently Asked Questions (FAQ)</h2>
+  <ul>
+    <li><b>Q1: 這與 Schema.org 有何不同？<br>How is this different from Schema.org?</b><br>A: Schema.org 適合標註整頁或主要實體，AI Anchor 更細緻，標記回答特定問題的片段。兩者可互補。<br>A: Schema.org is excellent for defining the semantics of an entire page or major entities on it (e.g., this is a Product, this is a Recipe). AI Anchors are more granular. They pinpoint the specific fragment of content that answers a specific question. They are complementary: you can have Schema.org's Product markup on your page, and use AI Anchors to flag the exact &lt;div&gt; that contains the specification or answers a pricing question.</li>
+    <li><b>Q2: 會增加開發者負擔嗎？<br>Is this a lot of extra work for developers?</b><br>A: 可漸進導入，先標記重要內容。WordPress 外掛等工具可自動化。<br>A: It can be implemented incrementally. Start by marking up only your most critical content on high-traffic pages. The proposed WordPress plugin and other CMS integrations aim to automate much of this process, making it as simple as filling out a few fields.</li>
+    <li><b>Q3: 會影響 SEO 嗎？<br>Will this negatively impact my SEO?</b><br>A: 不會。data-* 屬性為合法 HTML5，無理解者會忽略，有理解者（如 AI 搜尋）則可提升曝光。<br>A: No. The use of data-* attributes is valid HTML5 and is ignored by crawlers that do not understand it. For crawlers that do understand it (especially future AI-driven search engines), it is expected to have a significant positive impact by providing clearer signals about your content's relevance and structure, potentially improving your chances of appearing in featured snippets and AI-generated answers.</li>
+    <li><b>Q4: 可以套用在任何 HTML 元素嗎？<br>Can I use AI Anchors on any HTML element?</b><br>A: 可以，區塊元素（如 section、article、div）最常見，亦可用於小型內容（如 span）。<br>A: Yes. You can apply AI Anchor attributes to block-level elements like &lt;section&gt;, &lt;article&gt;, &lt;div&gt;, or even inline elements like &lt;span&gt; if the target content is very small, though block-level elements are the more common use case.</li>
+    <li><b>Q5: 沒填所有屬性會怎樣？<br>What happens if I don't provide all the attributes?</b><br>A: 只有 data-ai-anchor 為必填，其他屬性建議補充，愈多愈利於 AI 理解。<br>A: Only data-ai-anchor is strictly required to define an anchor. All other attributes are recommended for providing richer context. The more attributes you provide, the more effectively an AI can understand and utilize your content.</li>
+  </ul>
+</body>
+</html> 
