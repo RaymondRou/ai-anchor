@@ -1,0 +1,32 @@
+<!--
+AI Anchor sitemap-ai.xml 範例 / AI Anchor sitemap-ai.xml Example
+本檔案展示如何以 sitemap-ai.xml 格式描述 AI Anchor。
+This file demonstrates how to describe AI Anchors in sitemap-ai.xml format.
+-->
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:ai="https://your-github-repo/ai-anchor/ns/v1/sitemap">
+  <url>
+    <loc>https://www.example.com/services/enterprise</loc>
+    <lastmod>2025-07-11T10:00:00Z</lastmod>
+    <ai:anchor>
+      <ai:id>service-pricing-2025</ai:id>
+      <ai:topic>服務/方案/企業版</ai:topic>
+      <ai:updated>2025-07-11T10:00:00Z</ai:updated>
+    </ai:anchor>
+    <ai:anchor>
+      <ai:id>contact-sales</ai:id>
+      <ai:topic>聯絡資訊/銷售</ai:topic>
+      <ai:updated>2025-01-05T00:00:00Z</ai:updated>
+    </ai:anchor>
+  </url>
+  <url>
+    <loc>https://www.example.com/support/faq</loc>
+    <lastmod>2025-06-20T14:00:00Z</lastmod>
+    <ai:anchor>
+      <ai:id>faq-refund</ai:id>
+      <ai:topic>政策/退款</ai:topic>
+      <ai:updated>2025-06-20T14:00:00Z</ai:updated>
+    </ai:anchor>
+  </url>
+</urlset> 
