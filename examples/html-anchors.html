@@ -1,26 +1,164 @@
-<!--
-AI Anchor HTML 實作範例 / AI Anchor HTML Example
-本檔案展示如何於 HTML 中標註 AI Anchor 屬性。
-This file demonstrates how to annotate AI Anchor attributes in HTML.
--->
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <title>AI Anchor HTML 實作範例 / AI Anchor HTML Example</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>語意錨點 HTML 實作範例 / Semantic Anchor HTML Implementation Examples</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background-color: #f8f9fa;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        h1, h2, h3 {
+            border-bottom: 1px solid #eaeaea;
+            padding-bottom: 0.5rem;
+        }
+        h1 { font-size: 2.2em; }
+        h2 { font-size: 1.8em; margin-top: 2.5rem; }
+        h3 { font-size: 1.3em; margin-top: 2rem; border-bottom: none; }
+        section {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid #007bff;
+        }
+        pre {
+            background-color: #e9ecef;
+            padding: 1rem;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 14px;
+        }
+        code {
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+        }
+        .highlight {
+             border: 2px solid #007bff;
+             padding: 15px;
+             margin-top: 15px;
+             border-radius: 5px;
+             background-color: #f8f9fa;
+        }
+        .comment {
+            font-style: italic;
+            color: #6c757d;
+            margin-bottom: 1rem;
+        }
+    </style>
 </head>
 <body>
-  <h1>AI Anchor HTML 實作範例 / AI Anchor HTML Example</h1>
-  <article
-    data-ai-anchor="service-pricing-2025"
-    data-ai-question="你們的企業方案價格是多少？;What is the enterprise plan pricing?"
-    data-ai-topic="服務/方案/企業版"
-    data-ai-content="pricing"
-    data-ai-meta-version="3.0"
-    data-ai-meta-timestamp="2025-07-11T10:00:00Z"
-    data-ai-meta-priority="high">
-    <h3>企業版方案 / Enterprise Plan</h3>
-    <p>聯繫我們的銷售團隊以獲取客製化報價。<br>Contact our sales team for a custom quote.</p>
-  </article>
+    <div class="container">
+        <h1>語意錨點 HTML 實作範例 / Semantic Anchor HTML Examples</h1>
+        <p class="comment">本檔案展示了如何在不同真實場景中，應用「語意錨點」標準來提升內容對 AI 的可解釋性與權威性。</p>
+
+        <section>
+            <h2>場景一：電子商務產品頁 / Use Case 1: E-commerce Product Page</h2>
+            <p class="comment">在充滿促銷、廣告的頁面中，利用錨點精準標示出官方價格、庫存等核心商業資訊。</p>
+
+            <div class="highlight">
+                <div data-ai-anchor="product-official-price"
+                     data-ai-question="這個商品的官方價格是多少？"
+                     data-ai-topic="銷售/價格"
+                     data-ai-content="pricing"
+                     data-ai-meta-priority="high"
+                     data-ai-meta-timestamp="2025-07-13T12:00:00+08:00">
+                    <h3>AI 智慧相機 Pro / AI Smart Camera Pro</h3>
+                    <p><strong>官方售價 / Official Price:</strong> NT$ 25,900</p>
+                </div>
+            </div>
+            
+            <pre><code>&lt;!-- AI 平台可以忽略周圍的噪音，例如：--&gt;
+&lt;div class="promo"&gt;夏季特賣，原價 $28,900！&lt;/div&gt;
+
+&lt;!-- 這是錨點標註的核心區域 --&gt;
+&lt;div class="highlight"
+     data-ai-anchor="product-official-price"
+     data-ai-question="這個商品的官方價格是多少？"
+     data-ai-topic="銷售/價格"
+     data-ai-content="pricing"
+     data-ai-meta-priority="high"
+     data-ai-meta-timestamp="2025-07-13T12:00:00+08:00"&gt;
+    &lt;h3&gt;AI 智慧相機 Pro / AI Smart Camera Pro&lt;/h3&gt;
+    &lt;p&gt;&lt;strong&gt;官方售價 / Official Price:&lt;/strong&gt; NT$ 25,900&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+        </section>
+
+
+        <section>
+            <h2>場景二：常見問題頁面 / Use Case 2: FAQ Page</h2>
+            <p class="comment">將每一個獨立的 Q&A 對進行錨點標註，讓 AI 可以直接提取最精準的答案。</p>
+
+            <div class="highlight">
+                <div data-ai-anchor="faq-refund-policy"
+                     data-ai-question="退款政策是什麼？;如何申請退款？;退款要多久？"
+                     data-ai-content="faq">
+                    <h4>Q: 如何申請退款？ / How to apply for a refund?</h4>
+                    <p>A: 您可以在購買後的 14 天內，登入您的帳戶申請退款。退款流程通常需要 5-7 個工作天。</p>
+                </div>
+            </div>
+            
+            <pre><code>&lt;div class="faq-item"
+     data-ai-anchor="faq-refund-policy"
+     data-ai-question="退款政策是什麼？;如何申請退款？;退款要多久？"
+     data-ai-content="faq"&gt;
+    &lt;h4&gt;Q: 如何申請退款？ / How to apply for a refund?&lt;/h4&gt;
+    &lt;p&gt;A: 您可以在購買後的 14 天內，登入您的帳戶申請退款。退款流程通常需要 5-7 個工作天。&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+        </section>
+
+
+        <section>
+            <h2>場景三：新聞文章 / Use Case 3: News Article</h2>
+            <p class="comment">展示語意錨點如何與 Schema.org 互補，前者標註微觀資訊片段，後者定義宏觀實體。</p>
+
+            <div class="highlight" itemscope itemtype="http://schema.org/NewsArticle">
+                <h3 itemprop="headline">環保新規範將於下季生效</h3>
+                
+                <div itemprop="author" itemscope itemtype="http://schema.org/Person"
+                     data-ai-anchor="article-metadata"
+                     data-ai-question="這篇文章是誰寫的？什麼時候發布的？"
+                     data-ai-content="metadata">
+                    作者 (Author): <span itemprop="name">王敏萱</span>
+                    <time itemprop="datePublished" datetime="2025-07-12T15:00:00+08:00"
+                          data-ai-meta-timestamp="2025-07-12T15:00:00+08:00">
+                        發布於 / Published on: 2025年7月12日
+                    </time>
+                </div>
+
+                <div data-ai-anchor="article-summary"
+                     data-ai-question="這篇文章的摘要是什麼？"
+                     data-ai-content="summary">
+                     <p><strong>摘要 / Summary:</strong> 行政院今日宣布，旨在減少碳排放的新環保法規，將於今年十月一日起正式實施。</p>
+                </div>
+            </div>
+            
+            <pre><code>&lt;!-- Schema.org 定義了這是一個 NewsArticle --&gt;
+&lt;div class="highlight" itemscope itemtype="http://schema.org/NewsArticle"&gt;
+    &lt;h3 itemprop="headline"&gt;環保新規範將於下季生效&lt;/h3&gt;
+    
+    &lt;!-- 錨點一：標註作者與發布日期等元數據 --&gt;
+    &lt;div itemprop="author" ... data-ai-anchor="article-metadata" ...&gt;
+        ...
+    &lt;/div&gt;
+
+    &lt;!-- 錨點二：標註文章的核心摘要 --&gt;
+    &lt;div data-ai-anchor="article-summary" ...&gt;
+        ...
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </section>
+
+    </div>
 </body>
-</html> 
+</html>
