@@ -1,32 +1,61 @@
-<!--
-AI Anchor sitemap-ai.xml 範例 / AI Anchor sitemap-ai.xml Example
-本檔案展示如何以 sitemap-ai.xml 格式描述 AI Anchor。
-This file demonstrates how to describe AI Anchors in sitemap-ai.xml format.
--->
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:ai="https://your-github-repo/ai-anchor/ns/v1/sitemap">
+        xmlns:ai="https://semantic-anchor.org/ns/v1/sitemap">
+
   <url>
-    <loc>https://www.example.com/services/enterprise</loc>
-    <lastmod>2025-07-11T10:00:00Z</lastmod>
+    <loc>https://your-domain.com/products/camera-pro</loc>
+    <lastmod>2025-07-13T11:00:00+08:00</lastmod>
+    
     <ai:anchor>
-      <ai:id>service-pricing-2025</ai:id>
-      <ai:topic>服務/方案/企業版</ai:topic>
-      <ai:updated>2025-07-11T10:00:00Z</ai:updated>
+      <ai:id>product-official-price</ai:id>
+      <ai:priority>high</ai:priority>
+      <ai:contentType>pricing</ai:contentType>
+      <ai:topic>銷售/價格/官方定價</ai:topic>
+      <ai:question>AI 智慧相機 Pro 的官方售價是多少？</ai:question>
+      <ai:updated>2025-07-12T20:00:00+08:00</ai:updated>
     </ai:anchor>
+    
     <ai:anchor>
-      <ai:id>contact-sales</ai:id>
-      <ai:topic>聯絡資訊/銷售</ai:topic>
-      <ai:updated>2025-01-05T00:00:00Z</ai:updated>
+      <ai:id>product-stock-status</ai:id>
+      <ai:priority>medium</ai:priority>
+      <ai:contentType>stock-status</ai:contentType>
+      <ai:topic>銷售/庫存</ai:topic>
+      <ai:question>現在有貨嗎？</ai:question>
+      <ai:updated>2025-07-13T10:55:00+08:00</ai:updated>
     </ai:anchor>
+
+    <ai:anchor>
+        <ai:id>camera-specs</ai:id>
+        <ai:priority>medium</ai:priority>
+        <ai:contentType>specification</ai:contentType>
+        <ai:topic>產品/硬體規格</ai:topic>
+        <ai:updated>2025-07-10T11:00:00+08:00</ai:updated>
+    </ai:anchor>
+
   </url>
+
   <url>
-    <loc>https://www.example.com/support/faq</loc>
-    <lastmod>2025-06-20T14:00:00Z</lastmod>
+    <loc>https://your-domain.com/support/faq</loc>
+    <lastmod>2025-07-11T18:00:00+08:00</lastmod>
+    
     <ai:anchor>
-      <ai:id>faq-refund</ai:id>
+      <ai:id>faq-refund-policy</ai:id>
+      <ai:priority>high</ai:priority>
+      <ai:contentType>faq</ai:contentType>
       <ai:topic>政策/退款</ai:topic>
-      <ai:updated>2025-06-20T14:00:00Z</ai:updated>
+      <ai:question>退款政策是什麼？</ai:question>
+      <ai:updated>2025-07-11T18:00:00+08:00</ai:updated>
     </ai:anchor>
+    
+    <ai:anchor>
+      <ai:id>faq-account-delete</ai:id>
+      <ai:priority>medium</ai:priority>
+      <ai:contentType>faq</ai:contentType>
+      <ai:topic>帳戶管理/刪除</ai:topic>
+      <ai:question>如何刪除我的帳號？</ai:question>
+      <ai:updated>2025-06-20T14:00:00+08:00</ai:updated>
+    </ai:anchor>
+
   </url>
-</urlset> 
+
+</urlset>
