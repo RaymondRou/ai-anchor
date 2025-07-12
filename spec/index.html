@@ -1,18 +1,113 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <title>AI Anchor 規格（Draft） / AI Anchor Specification (Draft)</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>語意錨點規格中心 / Semantic Anchor Specification Hub</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            color: #333;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            background-color: #fafafa;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        h1, h2 {
+            border-bottom: 1px solid #eaeaea;
+            padding-bottom: 0.5rem;
+            color: #111;
+        }
+        p, li {
+            font-size: 16px;
+            color: #444;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .nav-list {
+            list-style: none;
+            padding: 0;
+        }
+        .nav-list li {
+            margin-bottom: 1rem;
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 5px;
+            border-left: 4px solid #007bff;
+        }
+        .nav-list a {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .nav-list .description {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 0.25rem;
+            display: block;
+        }
+        .status-note {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 2rem;
+        }
+    </style>
 </head>
 <body>
-  <h1>AI Anchor 規格（Draft） / AI Anchor Specification (Draft)</h1>
-  <p>本文件為 AI Anchor 規格的最新草案版本，內容可能隨時更新，請以 v1.0.html 為正式規格依據。</p>
-  <p>This document is the latest draft of the AI Anchor specification. Content may be updated at any time. Please refer to v1.0.html for the official specification.</p>
-  <ul>
-    <li>簡介 / Introduction</li>
-    <li>用途 / Purpose</li>
-    <li>規格草案 / Draft Specification</li>
-    <li><a href="./v1.0.html">正式規格 / Official Specification (v1.0)</a></li>
-  </ul>
+    <div class="container">
+        <h1>語意錨點規格中心 / Semantic Anchor Specification Hub</h1>
+
+        <p class="status-note">
+            您好！這裡是「語意錨點」開源專案的官方規格文件中心。本頁面將引導您找到所有相關的技術文檔與資源。
+        </p>
+
+        <h2>動機與願景 / Motivation & Vision</h2>
+        <p>
+            在生成式 AI 驅動的「零點擊」時代，傳統 SEO 正面臨結構性挑戰。我們的願景是提出一套從「搜尋引擎優化 (SEO)」到「AI 解讀優化 (AIO)」的全新戰略。語意錨點框架正是實現此戰略的核心技術，旨在讓內容發布者能夠主動、精確地將內容的 **權威性、時效性與意圖** 傳遞給 AI，重塑數位內容的價值。
+        </p>
+
+        <h2>核心原則 / Core Principles</h2>
+        <ul>
+            <li><strong>提升準確性：</strong> 在充滿資訊噪音的環境中，為 AI 提供清晰的「信號」，消除解讀的模糊性。</li>
+            <li><strong>賦予權威性：</strong> 讓 AI 在面對衝突資訊時，有充分的理由優先採納和信任經過錨點標註的內容。</li>
+            <li><strong>確保時效性：</strong> 透過時間戳元數據，讓發布者能精準控制其資訊的「新鮮度」，解決 AI 引用過時資料的問題。</li>
+            <li><strong>簡易與兼容：</strong> 完全基於 HTML5 `data-*` 屬性，確保與現有 Web 技術生態無縫兼容。</li>
+        </ul>
+
+        <h2>主要文件 / Key Documents</h2>
+        <ul class="nav-list">
+            <li>
+                <a href="../WHITEPAPER_zh.md">完整技術白皮書 / Full Technical Whitepaper (v2.1)</a>
+                <span class="description">深入了解我們的動機、所有實驗數據、以及完整的技術與生態系規劃。</span>
+            </li>
+            <li>
+                <a href="../README.md">專案首頁與快速上手 / Project README & Quick Start</a>
+                <span class="description">獲取專案的總體介紹、30 秒快速上手範例，以及如何貢獻。</span>
+            </li>
+            <li>
+                <a href="../examples/">實作範例目錄 / Implementation Examples</a>
+                <span class="description">查看所有用於真實世界測試的 HTML 範例檔案。</span>
+            </li>
+        </ul>
+
+        <h2>參與貢獻 / Contributing</h2>
+        <p>
+            本專案是一個開放的社群計畫。我們歡迎任何形式的貢獻，無論是提出建議、回報問題，還是協助開發工具。請前往我們的 <a href="https://github.com/your-username/your-repo/issues" target="_blank">GitHub Issues 頁面</a> 開始您的貢獻。
+        </p>
+    </div>
 </body>
-</html> 
+</html>
