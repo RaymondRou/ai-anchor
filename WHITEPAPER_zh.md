@@ -1,4 +1,4 @@
-﻿**技術白皮書草案**
+**技術白皮書微調版草案**
 
 標題： 語意錨點：在 AI 驅動的零點擊時代下，重塑內容價值與權威性的網頁標註框架
 
@@ -103,6 +103,7 @@
 - **2.1.3 程式碼範例**
 - 以下範例展示了如何在一個包含多種價格資訊的「混亂」頁面中，精準標示出官方定價區塊。
 - HTML
+```html
 <div class="product-info-section">
     <div class="promo-banner">
         <p>夏季特賣！AI 智慧相機 Pro，原價 $28,900，現省 $3000！</p>
@@ -114,12 +115,12 @@
          data-ai-content="pricing"
          data-ai-meta-priority="high"
          data-ai-meta-timestamp="2025-07-12T20:00:00+08:00">
-
         <h3>官方定價資訊</h3>
         <p>產品的正式售價為 NT$25,900 元。</p>
         <span>*此為單機身建議售價。</span>
     </div>
 </div>
+```
 - 在此範例中，AI 模型能夠根據 data-ai-anchor 及其 priority="high" 的屬性，在多個價格中準確識別出 NT$25,900 是唯一可信的官方售價。
 - **2.2 JSON-LD 對應表示法**
 - 為了更好地支援偏好處理結構化資料的現代資料管線 (Data Pipeline) 與 AI 爬蟲，語意錨點框架也提供了一套完整的 JSON-LD (JSON for Linking Data) 表示方案。網站發布者可以選擇將頁面內所有的錨點資訊，統一聚合在一個 <script type="application/ld+json"> 區塊中。
@@ -127,14 +128,14 @@
 - 我們建議使用一個專用的 @context 來定義詞彙表，並以一個 SemanticAnchorSet 物件來包含頁面中所有的 SemanticAnchor 陣列。
 - **程式碼範例：**
 - HTML
-
+```html
 <script type="application/ld+json">
 {
-  "@context": "https://semantic-anchor.org/ns/v1", // 假設的標準詞彙表 URL
+  "@context": "https://semantic-anchor.org/ns/v1",
   "@type": "SemanticAnchorSet",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://example.com/product/camera-pro" // 當前頁面 URL
+    "@id": "https://example.com/product/camera-pro"
   },
   "hasAnchor": [
     {
@@ -166,6 +167,7 @@
   ]
 }
 </script>
+```
 - 這種方式讓 AI 爬蟲可以一次性獲取頁面上所有結構化的錨點元數據，極大地提升了資料獲取的效率與準確性，同時也與 Schema.org 等既有的結構化資料實踐保持了良好的兼容性。
 
 -----
@@ -185,17 +187,13 @@
 兩者結合使用能發揮出 1+1 > 2 的強大效果。Schema.org 為 AI 提供了頁面的整體背景，而語意錨點則在此背景下，為 AI 提供了精準導航的路標。
 
 **整合應用範例：**
-
-HTML
-
+```html
 <body itemscope itemtype="http://schema.org/NewsArticle">
     <h1 itemprop="headline">AI 晶片市場迎來新變革</h1>
-
     <div itemprop="author" itemscope itemtype="http://schema.org/Person">
         作者：<span itemprop="name">陳志明</span>
     </div>
     <meta itemprop="datePublished" content="2025-07-12T09:00:00+08:00">
-
     <article itemprop="articleBody">
         <p>（文章前導內容...）</p>
         <div class="summary-box"
@@ -214,6 +212,7 @@ HTML
         <p>（文章其餘內容...）</p>
     </article>
 </body>
+```
 
 在此範例中，AI 首先通過 Schema.org 得知「這是一篇新聞報導」，然後可以利用語意錨點 article-summary 快速生成文章摘要，或在回答「市場預期如何？」時，精準引用 market-growth-quote 的內容及其時間戳。
 
@@ -251,7 +250,7 @@ HTML
 - **程式碼範例：**
 
 HTML
-
+```html
 <div class="product-purchase-area">
     <div class="flash-sale" 
          data-ai-anchor="flash-sale-promo"
@@ -276,7 +275,7 @@ HTML
         <p>庫存狀態：<span class="stock-level">現貨供應</span></p>
     </div>
 </div>
-
+```
 - **實證效益：**
   - **確保價格準確性：** 保障 AI 提供的報價與網站的權威標示一致，避免誤解。
   - **提升消費者信任：** 提供準確的庫存與時效性優惠資訊，增加使用者下單的信心。
@@ -295,7 +294,7 @@ HTML
 - **程式碼範例：**
 
 HTML
-
+```html
 <article itemscope itemtype="http://schema.org/NewsArticle">
     <header>
         <h1 itemprop="headline">環保新規範將於下季生效</h1>
@@ -322,7 +321,7 @@ HTML
         <p>（文章其餘內容...）</p>
     </section>
 </article>
-
+```
 - **實證效益：**
   - **準確的新聞聚合：** 幫助 AI 助理（如 Google Assistant, Siri）在播報新聞時，能準確說出「根據記者王敏萱在昨天下午發布的報導...」。
   - **提升內容可信度：** 明確的時間戳有助於 AI 在處理突發新聞的更新時，優先引用最新的報導版本。
@@ -341,7 +340,7 @@ HTML
 - **程式碼範例：**
 
 HTML
-
+```html
 <section id="faq-section">
     <h2>常見問題</h2>
     <div class="faq-item"
@@ -359,7 +358,7 @@ HTML
         <p>A: 請直接聯繫我們的客服信箱 support@example.com，並提供您的註冊信箱，我們將有專人為您處理。</p>
     </div>
 </section>
-
+```
 - **實證效益：**
   - **提升 AI 客服效率：** 讓 Chatbot 或 AI 助理能直接、完整地引用錨點內的答案，實現「一次性問題解決（First-Contact Resolution）」。
   - **優化搜尋體驗：** 在 Google 等搜尋引擎的「精選摘要（Featured Snippets）」或 AI 生成的答案中，有極高機率直接展示被錨點標記的答案區塊。
@@ -530,7 +529,7 @@ sitemap-ai.xml 應被放置在網站根目錄，並在 robots.txt 中進行聲�
 **sitemap-ai.xml 範例：**
 
 XML
-
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:ai="https://semantic-anchor.org/ns/v1/sitemap">
@@ -558,6 +557,7 @@ XML
     </ai:anchor>
   </url>
 </urlset>
+```
 
 透過這個 sitemap，AI 平台可以建立一個「**全網站錨點索引**」，從而實現前所未有的、精準高效的內容發現與更新策略。建立包含 WordPress 插件和 sitemap-ai.xml 協議在內的健康生態系統，是推動語意錨點框架從一個優秀的理念，走向一個被廣泛採納的行業標準的必經之路。
 
@@ -607,7 +607,7 @@ XML
 
 我們正處於一個由 AI 重新定義資訊流動方式的歷史性節點。傳統的、為人類視覺設計的 Web 正在被動地接受 AI 的解構，並由此引發了「零點擊」時代下內容創作者的生存危機。面對這場不可逆轉的變革，消極防禦或被動談判已不足以應對挑戰。
 
-本白皮書提出的「語意錨點」框架，旨在提供一個積極、主動、具備建設性的第三條道路。它是一種**從「搜尋引擎優化 (SEO)」到「AI 解讀優化 (AIO)」的戰略思想轉變**。透過這套簡單而強大的 HTML 擴展標準，內容發布者第一次擁有了一種標準化的工具，能夠將自己的「意圖」和內容的「權威性」直接傳遞給機器。
+本白皮書提出的「語意錨P點」框架，旨在提供一個積極、主動、具備建設性的第三條道路。它是一種**從「搜尋引擎優化 (SEO)」到「AI 解讀優化 (AIO)」的戰略思想轉變**。透過這套簡單而強大的 HTML 擴展標準，內容發布者第一次擁有了一種標準化的工具，能夠將自己的「意圖」和內容的「權威性」直接傳遞給機器。
 
 我們的實證數據表明，語意錨點能夠在充滿資訊噪音的複雜環境中，顯著提升 AI 提取內容的**準確性**；透過時間戳等元數據，它能確保 AI 答案的**時效性**；最重要的是，它為發布者在 AI 時代下**重塑內容價值、重獲數位主導權**提供了一個堅實的技術基礎。
 
