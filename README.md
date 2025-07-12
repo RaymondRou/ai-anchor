@@ -47,8 +47,14 @@ This project provides a dedicated AI Anchor specification and examples to help w
 
 **➡️ [點此閱讀完整的技術白皮書 (v2.0)](WHITEPAPER_zh.md)**
 
-### 🗂️ 專案結構 (Repository Contents)
+### 📁 專案結構 / Project Structure
+- **`/spec`**: 規格文件 / Specification documents (包含白皮書)
+- **`/examples`**: 實作範例 / Implementation examples
+- **`/sitemap-ai`**: AI 專用 Sitemap 範例 / AI-specific sitemap example
 
-* `spec/`：規格文件 / Specification documents
-* `examples/`：實作範例 / Implementation examples
-* `sitemap
+### 🤝 如何貢獻 / How to Contribute
+我們歡迎任何形式的貢獻！無論是提出建議、回報問題，還是協助開發工具，請前往我們的 [Issues 頁面](https://github.com/your-username/your-repo/issues) 開始。
+
+### 📜 授權 / License
+本專案採用 [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/) 授權。
+This project is licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License.
