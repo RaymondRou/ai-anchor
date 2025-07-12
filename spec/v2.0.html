@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>語意錨點規格 v2.0 / Semantic Anchor Specification v2.0</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; line-height: 1.7; color: #333; max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
+        h1, h2, h3, h4 { border-bottom: 1px solid #eaeaea; padding-bottom: 0.5rem; color: #111; }
+        h1 { font-size: 2.5em; }
+        h2 { font-size: 2em; margin-top: 2.5rem; }
+        h3 { font-size: 1.5em; margin-top: 2rem; border-bottom: none; }
+        h4 { font-size: 1.2em; margin-top: 1.5rem; border-bottom: none; font-style: italic; color: #555;}
+        p, li { font-size: 16px; color: #444; }
+        a { color: #007bff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        pre { background-color: #f8f9fa; padding: 1rem; border-radius: 5px; white-space: pre-wrap; word-wrap: break-word; }
+        code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+        table { border-collapse: collapse; width: 100%; margin-top: 1rem; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #f2f2f2; font-weight: bold; }
+        .note { background-color: #fff3cd; border-left: 5px solid #ffeeba; color: #856404; padding: 1rem; margin: 1.5rem 0; }
+        .abstract { border-left: 5px solid #cce5ff; padding-left: 1.5rem; font-style: italic; }
+        .toc { background-color: #f8f9fa; padding: 1rem 2rem; border-radius: 8px; }
+        .toc ol { padding-left: 20px; }
+    </style>
+</head>
+<body>
+    <h1>語意錨點規格 v2.0 / Semantic Anchor Specification v2.0</h1>
+    <p><b>W3C 編輯草案 / W3C Editor's Draft, 13 July 2025</b></p>
+    <p>
+        最新發佈版本 / Latest published version:<br>
+        <a href="https://your-github-repo/ai-anchor/spec/">https://your-github-repo/ai-anchor/spec/</a>
+    </p>
+    <p>
+        編輯者 / Editors:<br>
+        Ray Hsu
+    </p>
+    <p>
+        版權所有 © 2025 Ray Hsu。本作品採用 Creative Commons Attribution 4.0 International License 授權。<br>
+        Copyright © 2025 Ray Hsu. This work is licensed under a Creative Commons Attribution 4.0 International License.
+    </p>
+
+    <hr>
+
+    <h2>摘要 / Abstract</h2>
+    <div class="abstract">
+        <p>隨著生成式 AI 將網路從「點擊經濟」推向「答案經濟」，內容發布者面臨著「零點擊」的結構性危機。本白皮書定義了一套名為「語意錨點（Semantic Anchor）」的 HTML 擴展標註框架，旨在應對此挑戰。它不僅是一項技術優化，更是一種從「搜尋引擎優化 (SEO)」到「AI 解讀優化 (AIO)」的戰略轉變。透過賦予發布者直接標註內容「權威性」與「意圖」的能力，本框架旨在顯著提升 AI 提取資訊的準確性、時效性與可靠性。我們的實證數據表明，此標準能有效引導 AI 在面對資訊衝突與偏見時做出正確判斷，為建立一個基於「權威引用」的新型態價值交換提供堅實的技術基礎。</p>
+        <p>As Generative AI shifts the web from a click-based economy to an answer-based one, content publishers face a structural "zero-click" crisis. This document defines the "Semantic Anchor" framework, an HTML extension designed to address this challenge. It represents a strategic shift from Search Engine Optimization (SEO) to AI Interpretation Optimization (AIO). By empowering publishers to directly encode the "authority" and "intent" of their content, this framework aims to significantly improve the accuracy, timeliness, and reliability of AI data extraction. Our empirical data demonstrates that this standard effectively guides AI in making correct judgments amidst conflicting information and bias, providing a robust technical foundation for a new value exchange based on "authoritative citation."</p>
+    </div>
+
+    <h2>目錄 / Table of Contents</h2>
+    <nav class="toc">
+        <ol>
+            <li><a href="#introduction">緒論：從 SEO 到 AIO</a></li>
+            <li><a href="#core-spec">核心技術規範</a></li>
+            <li><a href="#interoperability">技術通用性與可擴展性</a></li>
+            <li><a href="#use-cases">應用場景</a></li>
+            <li><a href="#validation">實證分析與效益驗證</a></li>
+            <li><a href="#implementation">實作生態系與內容發現機制</a></li>
+            <li><a href="#future">未來發展與標準化路徑</a></li>
+            <li><a href="#faq">常見問答 (FAQ)</a></li>
+        </ol>
+    </nav>
+    
+    <h2 id="introduction">1. 緒論：從 SEO 到 AIO / Introduction: From SEO to AIO</h2>
+    <p>（此處可濃縮白皮書第一章的核心論述，強調零點擊危機與 AIO 戰略的提出...）</p>
+
+    <h2 id="core-spec">2. 核心技術規範 / Core Specification</h2>
+    <p>本規格核心為一組 `data-*` 屬性，可套用於任何 HTML 元素。</p>
+    
+    <h3>2.1 主要屬性 / Primary Attributes</h3>
+    <table>
+        <thead>
+            <tr><th>屬性 / Attribute</th><th>值類型 / Value Type</th><th>必要性 / Requirement</th><th>描述 / Description</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>data-ai-anchor</code></td><td>string</td><td>**必要 (Required)**</td><td>頁面內唯一的錨點識別碼。</td></tr>
+            <tr><td><code>data-ai-question</code></td><td>string</td><td>建議 (Recommended)</td><td>標示此區塊回答的自然語言問題，多個問題用分號 (;) 分隔。</td></tr>
+            <tr><td><code>data-ai-topic</code></td><td>string</td><td>建議 (Recommended)</td><td>內容的階層式主題分類，用斜線 (/) 分隔。</td></tr>
+            <tr><td><code>data-ai-content</code></td><td>enum</td><td>建議 (Recommended)</td><td>內容的性質類型，如 `pricing`, `specification` 等。</td></tr>
+        </tbody>
+    </table>
+
+    <h3>2.2 元數據擴展屬性 / Metadata Extension Attributes</h3>
+    <table>
+        <thead>
+            <tr><th>屬性 / Attribute</th><th>值類型 / Value Type</th><th>描述 / Description</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>data-ai-meta-timestamp</code></td><td>ISO 8601</td><td>內容的最後更新時間戳，**時效性權重的關鍵信號**。</td></tr>
+            <tr><td><code>data-ai-meta-version</code></td><td>string</td><td>內容的版本號。</td></tr>
+            <tr><td><code>data-ai-meta-license</code></td><td>string</td><td>內容的版權授權。</td></tr>
+            <tr><td><code>data-ai-meta-priority</code></td><td>enum (`high`, `medium`, `low`)</td><td>內容的相對重要性。</td></tr>
+            <tr><td><code>data-ai-meta-expires</code></td><td>ISO 8601</td><td>內容的有效期限。</td></tr>
+        </tbody>
+    </table>
+    
+    <h3>2.3 JSON-LD 對應表示法 / JSON-LD Alternative</h3>
+    <p>為支援現代資料管線，所有錨點資訊也可在一個 `script` 區塊中以 JSON-LD 格式統一提供。</p>
+    <pre><code>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://semantic-anchor.org/ns/v1",
+  "@type": "SemanticAnchorSet",
+  "hasAnchor": [
+    {
+      "@type": "SemanticAnchor",
+      "anchorId": "camera-pro-official-price",
+      "question": "AI 智慧相機 Pro 的官方售價是多少？",
+      "topic": "銷售/價格/官方定價",
+      "contentType": "pricing",
+      "metadata": {
+        "@type": "Metadata",
+        "priority": "high",
+        "timestamp": "2025-07-12T20:00:00+08:00"
+      }
+    }
+  ]
+}
+&lt;/script&gt;</code></pre>
+
+    <h2 id="interoperability">3. 技術通用性與可擴展性 / Interoperability & Extensibility</h2>
+    <p>語意錨點旨在**補充而非取代**現有標準。它與 Schema.org 共同運作，前者定義「宏觀實體」，後者標註「微觀資訊片段」。其基於 `data-*` 的設計確保了與 HTML5, CSS, JS 的完全兼容性，並為未來的社群擴展提供了穩固基礎。</p>
+
+    <h2 id="use-cases">4. 應用場景 / Application Scenarios</h2>
+    <p>本標準在**電子商務**（精準標示價格與庫存）、**新聞媒體**（強化作者歸因與時效性）及**線上知識庫**（實現精準問答）等領域均有顯著應用價值。</p>
+
+    <h2 id="validation">5. 實證分析與效益驗證 / Empirical Analysis & Validation</h2>
+    <div class="note">
+        <p><strong>本章節為 v2.0 的核心更新。</strong> 我們執行了一系列包含「資訊噪音」、「資訊衝突」、「惡意標註」與「偏見引導」的對照實驗。數據無可辯駁地證明，語意錨點不僅能顯著提升 AI 提取資訊的準確性，更能作為**權威性信號**，引導 AI 在衝突中做出正確選擇，並具備抵抗惡意標註與迎合偏見的**穩健性與客觀性**。</p>
+        <p>欲了解完整的實驗設計、過程與 AI 的詳細回答，請參閱我們的**<a href="../WHITEPAPER_zh.md">完整版技術白皮書</a>**。</p>
+    </div>
+
+    <h4>5.1 關鍵結論摘要表 / Summary of Key Findings</h4>
+    <table>
+        <thead>
+            <tr><th>測試場景</th><th>錨點核心效益</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>資訊噪音</td><td>**提升準確性：** 將 AI 從「模糊推理」轉變為「權威提取」。</td></tr>
+            <tr><td>資訊衝突</td><td>**提升權威性：** 成為 AI 判斷資訊可信度的「勝負手」。</td></tr>
+            <tr><td>惡意標註</td><td>**展現穩健性：** AI 能識別錯位的錨點並進行批判性思考。</td></tr>
+            <tr><td>偏見引導</td><td>**證明客觀性：** AI 能忽略主觀偏好，選擇客觀技術最優解。</td></tr>
+        </tbody>
+    </table>
+
+    <h2 id="implementation">6. 實作生態系與內容發現機制 / Implementation & Discovery</h2>
+    <p>為促進採納，我們建議開發 WordPress 等 CMS 插件，並推廣 `sitemap-ai.xml` 協議，以幫助 AI 平台高效發現和更新被錨點標註的內容，從而建立一個互惠的生態系統。</p>
+    
+    <h2 id="future">7. 未來發展與標準化路徑 / Future Development & Standardization</h2>
+    <p>本專案將以開源社群為核心，持續演進。長遠目標是透過成立 W3C 社群組（CG），孵化並完善此規範，最終尋求成為正式的 W3C 推薦標準（Recommendation）。</p>
+
+    <h2 id="faq">8. 常見問答 / FAQ</h2>
+    <ul>
+        <li><b>Q: 這與 Schema.org 有何不同？ / How is this different from Schema.org?</b><br>A: Schema.org 定義頁面級實體（是什麼），語意錨點標註片段級意圖（有何用）。兩者互補。</li>
+        <li><b>Q: 這會增加開發者負擔嗎？ / Is this extra work?</b><br>A: 可漸進導入。CMS 插件等工具將大幅簡化部署流程。</li>
+        <li><b>Q: 會影響 SEO 嗎？ / Will this affect SEO?</b><br>A: 不會產生負面影響。對於新一代 AI 搜尋，這是一種「AIO 優化」，預期將有正面效益。</li>
+    </ul>
+
+</body>
+</html>
