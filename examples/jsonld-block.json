@@ -1,26 +1,72 @@
 {
-  "@context": "https://your-github-repo/ai-anchor/ns/v1#",
-  "@type": "AIAnchorSet",
+  "@context": "https://semantic-anchor.org/ns/v1",
+  "@type": "SemanticAnchorSet",
+  "comment": "這是一個展示如何在單一頁面中，利用 JSON-LD 描述多個語意錨點的綜合範例。This is a comprehensive example demonstrating how to describe multiple Semantic Anchors on a single page using JSON-LD.",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://example.com/comprehensive-demo-page.html"
+  },
   "hasAnchor": [
     {
-      "@type": "AIAnchor",
-      "anchorId": "service-pricing-2025",
+      "@type": "SemanticAnchor",
+      "anchorId": "product-official-price",
+      "description": "場景一：電子商務產品頁的官方價格，標示為高優先級以應對資訊噪音。",
       "question": [
-        "你們的企業方案價格是多少？",
-        "What is the enterprise plan pricing?"
+        "這個商品的官方價格是多少？",
+        "What is the official price of this product?"
       ],
-      "topic": "服務/方案/企業版",
+      "topic": "銷售/價格/官方定價",
       "contentType": "pricing",
-      "version": "3.0",
-      "timestamp": "2025-07-11T10:00:00Z",
-      "priority": "high"
+      "metadata": {
+        "@type": "Metadata",
+        "priority": "high",
+        "timestamp": "2025-07-13T12:00:00+08:00"
+      }
     },
     {
-      "@type": "AIAnchor",
-      "anchorId": "faq-refund",
-      "question": "退款政策是什麼？",
+      "@type": "SemanticAnchor",
+      "anchorId": "product-stock-status",
+      "description": "場景一：電子商務產品頁的庫存狀態。",
+      "question": "現在有貨嗎？",
+      "topic": "銷售/庫存",
+      "contentType": "stock-status",
+      "metadata": {
+        "@type": "Metadata",
+        "timestamp": "2025-07-13T12:05:00+08:00"
+      }
+    },
+    {
+      "@type": "SemanticAnchor",
+      "anchorId": "faq-refund-policy",
+      "description": "場景二：FAQ 頁面的退款政策問答對。",
+      "question": [
+        "退款政策是什麼？",
+        "如何申請退款？",
+        "退款要多久？"
+      ],
       "topic": "政策/退款",
       "contentType": "faq"
+    },
+    {
+      "@type": "SemanticAnchor",
+      "anchorId": "article-metadata",
+      "description": "場景三：新聞文章的元數據，與 Schema.org 互補。",
+      "question": "這篇文章是誰寫的？什麼時候發布的？",
+      "topic": "新聞/元數據",
+      "contentType": "metadata",
+      "metadata": {
+        "@type": "Metadata",
+        "timestamp": "2025-07-12T15:00:00+08:00",
+        "version": "1.0"
+      }
+    },
+    {
+      "@type": "SemanticAnchor",
+      "anchorId": "article-summary",
+      "description": "場景三：新聞文章的核心摘要。",
+      "question": "這篇文章的摘要是什麼？",
+      "topic": "新聞/摘要",
+      "contentType": "summary"
     }
   ]
-} 
+}
